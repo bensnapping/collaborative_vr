@@ -15,3 +15,10 @@ open the terminal (or Git Bash on Windows)
 2. Then 'git commit -m "This is a description of the changes" '
 
 3. Then 'git push'
+
+
+
+If you're just adding a file, you can go to the Github repository at
+https://github.com/bensnapping/collaborative_vr and click the "Add File"
+button. Then drag the files into the repository. Don't forget to add a
+commit message.
