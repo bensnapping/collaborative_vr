@@ -5,5 +5,5 @@ using System;
 public struct SlideOrder {
 
 	public Sprite slide;
-	public float holdTime;
+	public AudioClip attachedAudio;
 }

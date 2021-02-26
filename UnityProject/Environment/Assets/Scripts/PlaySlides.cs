@@ -8,7 +8,9 @@ public class PlaySlides : MonoBehaviour
 	
 	SpriteRenderer spriteRenderer;
 	
-	public List<SlideOrder> slides = new List<SlideOrder>();
+	public AudioSource speaker;
+	
+	[HideInInspector] public List<SlideOrder> slides = new List<SlideOrder>();
 	
 	void Start(){
 		spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -26,7 +28,10 @@ public class PlaySlides : MonoBehaviour
 			
 			ChangeSprite(curSlide);
 			
-			yield return new WaitForSeconds(slides[curSlide].holdTime);
+			speaker.clip = slides[curSlide].attachedAudio;
+			speaker.Play();
+			
+			yield return new WaitForSeconds(slides[curSlide].attachedAudio.length + 1);
 			
 		}
 	}

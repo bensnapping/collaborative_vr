@@ -15,13 +15,15 @@ public class PlaySlidesEditor : Editor
 {
 	
 	// Makes it easier to mess with the spacing in that first lambda function
-	private int holdTimeFieldSize = 200;
+	private int audioFieldSize = 200;
 	private int slideFieldSize = 100;
 	
 	// Defining a GUIStyle so that we can use html tags on the labels in the inspector
 	private GUIStyle htmlStyle = GUIStyle.none;
 	
     private ReorderableList list;
+	
+	//private AudioSource speaker;
 	
 	
 	private void OnEnable(){
@@ -48,13 +50,13 @@ public class PlaySlidesEditor : Editor
 			// Sets up the Sprite display
 			if(s != null){
 				EditorGUI.DrawPreviewTexture(
-					new Rect(rect.x, rect.y, rect.width - slideFieldSize - holdTimeFieldSize, rect.height),  // Rect(x position, y position, width, height)
+					new Rect(rect.x, rect.y, rect.width - slideFieldSize - audioFieldSize, rect.height),  // Rect(x position, y position, width, height)
 					s.texture // draws the sprite as a texture
 					);
 			} else{
 				
 				EditorGUI.LabelField(
-				new Rect(rect.x, rect.y, rect.width - slideFieldSize - holdTimeFieldSize, rect.height),  // Rect(x position, y position, width, height)
+				new Rect(rect.x, rect.y, rect.width - slideFieldSize - audioFieldSize, rect.height),  // Rect(x position, y position, width, height)
 				"empty"
 				);
 				
@@ -62,15 +64,15 @@ public class PlaySlidesEditor : Editor
 			
 			// Sets up the Sprite field
 			EditorGUI.PropertyField(
-				new Rect(rect.x + rect.width - slideFieldSize - holdTimeFieldSize, rect.y, slideFieldSize, rect.height),  // Rect(x position, y position, width, height)
+				new Rect(rect.x + rect.width - slideFieldSize - audioFieldSize, rect.y, slideFieldSize, rect.height),  // Rect(x position, y position, width, height)
 				element.FindPropertyRelative("slide"), // Finds the "slide" variable from the SlideOrder struct
 				GUIContent.none // Fills the space with empty
 				);
 				
 			// Sets up the holdTime field
 			EditorGUI.PropertyField(
-				new Rect(rect.x + rect.width - holdTimeFieldSize, rect.y, holdTimeFieldSize, rect.height), // Rect(x position, y position, width, height)
-				element.FindPropertyRelative("holdTime"), // Finds the "holdTime" variable from the SlideOrder struct
+				new Rect(rect.x + rect.width - audioFieldSize, rect.y, audioFieldSize, rect.height), // Rect(x position, y position, width, height)
+				element.FindPropertyRelative("attachedAudio"), // Finds the "holdTime" variable from the SlideOrder struct
 				GUIContent.none // Fills the space with empty (0 in this case because it's a float)
 				);
 		};
@@ -121,6 +123,10 @@ public class PlaySlidesEditor : Editor
 	public override void OnInspectorGUI(){
 		
 		serializedObject.Update();
+		
+		//GUILayout.BeginHorizontal();
+		//GUILayout.Label("<b>Audio Source<b>", htmlStyle);
+		base.DrawDefaultInspector();
 		
 		GUILayout.Space(20f);
 		GUILayout.Label("<b>Edit Slides</b>", htmlStyle);
